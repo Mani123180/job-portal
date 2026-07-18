@@ -180,26 +180,7 @@ export default function Auth({ setView, setUserSession, initialMode = 'login', a
           )}
         </div>
 
-        {/* Demo Credentials Box */}
-        <div className="pt-5 border-t border-slate-900 text-left space-y-3.5">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-            🔑 Demo Login Credentials
-          </span>
-          <div className="space-y-2 text-[11px] text-slate-500">
-            <div className="flex justify-between items-center p-2 rounded-xl bg-slate-950/60 border border-slate-900">
-              <span className="font-bold text-slate-400">Candidate:</span>
-              <span className="font-mono">candidate@demo.com / password</span>
-            </div>
-            <div className="flex justify-between items-center p-2 rounded-xl bg-slate-950/60 border border-slate-900">
-              <span className="font-bold text-slate-400">Employer:</span>
-              <span className="font-mono">employer@demo.com / password</span>
-            </div>
-            <div className="flex justify-between items-center p-2 rounded-xl bg-slate-950/60 border border-slate-900">
-              <span className="font-bold text-slate-400">Admin:</span>
-              <span className="font-mono">admin@demo.com / admin</span>
-            </div>
-          </div>
-        </div>
+
 
       </div>
     </div>
