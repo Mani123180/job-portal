@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { LayoutDashboard, Users, Building, Briefcase, Trash2, ShieldAlert, CheckCircle, Search, Star, MapPin, Plus, Edit } from 'lucide-react';
+import { LayoutDashboard, Users, Building, Briefcase, Trash2, ShieldAlert, CheckCircle, Search, Star, MapPin, Plus, Edit, Menu, X } from 'lucide-react';
 import { getCandidates, deleteCandidate, getEmployers, deleteEmployer, getJobs, deleteJob, getApplications, register, saveJob, saveEmployerProfile } from '../mockData';
 import Modal from '../components/Modal';
 
 export default function AdminDashboard({ userSession, addToast }) {
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'candidates' | 'employers' | 'jobs'
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [candidates, setCandidates] = useState([]);
   const [employers, setEmployers] = useState([]);
   const [jobs, setJobs] = useState([]);
@@ -244,18 +245,28 @@ export default function AdminDashboard({ userSession, addToast }) {
       {/* Sidebar Navigation */}
       <div className="w-full md:w-64 shrink-0 space-y-4">
         {/* Admin Header */}
-        <div className="p-6 rounded-2xl border border-slate-900 bg-slate-900/30 glass flex items-center gap-3">
-          <div className="p-2 bg-gradient-to-tr from-violet-600 to-indigo-600 rounded-xl shadow-lg">
-            <ShieldAlert className="w-5 h-5 text-white" />
+        <div className="p-6 rounded-2xl border border-slate-900 bg-slate-900/30 glass flex items-center justify-between md:justify-start gap-3">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-gradient-to-tr from-violet-600 to-indigo-600 rounded-xl shadow-lg">
+              <ShieldAlert className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-slate-200">System Admin</h4>
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Security Access</span>
+            </div>
           </div>
-          <div>
-            <h4 className="text-sm font-bold text-slate-200">System Admin</h4>
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Security Access</span>
-          </div>
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 cursor-pointer"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          </button>
         </div>
 
         {/* Tab Links */}
-        <div className="p-2 rounded-2xl border border-slate-900 bg-slate-900/10 glass flex flex-col gap-1">
+        <div className={`p-2 rounded-2xl border border-slate-900 bg-slate-900/10 glass flex flex-col gap-1 md:flex ${mobileMenuOpen ? 'flex' : 'hidden'}`}>
           {[
             { id: 'overview', label: 'Overview Metrics', icon: <LayoutDashboard className="w-4 h-4" /> },
             { id: 'candidates', label: 'Manage Candidates', icon: <Users className="w-4 h-4" /> },
@@ -264,7 +275,10 @@ export default function AdminDashboard({ userSession, addToast }) {
           ].map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                setMobileMenuOpen(false);
+              }}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-left cursor-pointer ${
                 activeTab === tab.id
                   ? 'bg-slate-900 text-violet-400 border border-slate-800 shadow-sm'

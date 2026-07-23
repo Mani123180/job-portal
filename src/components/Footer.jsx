@@ -77,16 +77,16 @@ export default function Footer({ setView }) {
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-violet-500 shrink-0 mt-0.5" />
                 <span className="text-slate-500 leading-snug">
-                  100 Tech Venture Way, Suite 400<br />San Francisco, CA 94107
+                  100 Estancia IT Park, GST Road<br />Vallancherry, Chennai, TN - 603202
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-violet-500 shrink-0" />
-                <span className="text-slate-500">+1 (800) 555-0190</span>
+                <span className="text-slate-500">+91 44 6740 4000</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-violet-500 shrink-0" />
-                <span className="text-slate-500">support@jobportal.com</span>
+                <span className="text-slate-500">support@jobportal.in</span>
               </li>
             </ul>
           </div>

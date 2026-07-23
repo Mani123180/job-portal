@@ -10,13 +10,17 @@ import Auth from './pages/Auth';
 import CandidateDashboard from './pages/CandidateDashboard';
 import EmployerDashboard from './pages/EmployerDashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import Companies from './pages/Companies';
+import Coaching from './pages/Coaching';
+import Mentorship from './pages/Mentorship';
 import { getSession, logout, initializeDB } from './mockData';
 
 export default function App() {
-  const [currentView, setView] = useState('home'); // 'home' | 'jobs' | 'about' | 'contact' | 'auth' | 'dashboard'
+  const [currentView, setView] = useState('home'); // 'home' | 'jobs' | 'about' | 'contact' | 'auth' | 'dashboard' | 'companies' | 'coaching' | 'mentorship'
   const [authMode, setAuthMode] = useState('login'); // 'login' | 'register'
   const [userSession, setUserSession] = useState(null);
   const [toast, setToast] = useState(null);
+  const [subSection, setSubSection] = useState('');
   
   // Job filters passed from Home search to Jobs panel
   const [jobFilters, setJobFilters] = useState({
@@ -75,6 +79,12 @@ export default function App() {
         );
       case 'about':
         return <About />;
+      case 'companies':
+        return <Companies subSection={subSection} setSubSection={setSubSection} addToast={addToast} />;
+      case 'coaching':
+        return <Coaching subSection={subSection} setSubSection={setSubSection} addToast={addToast} />;
+      case 'mentorship':
+        return <Mentorship subSection={subSection} setSubSection={setSubSection} addToast={addToast} />;
       case 'contact':
         return <Contact addToast={addToast} />;
       case 'auth':
@@ -132,6 +142,8 @@ export default function App() {
         userSession={userSession} 
         onLogout={handleLogout} 
         setAuthMode={setAuthMode} 
+        setSubSection={setSubSection}
+        setJobFilters={setJobFilters}
       />
 
       {/* Main Container */}
@@ -140,7 +152,7 @@ export default function App() {
       </main>
 
       {/* Multi-column Footer */}
-      {!userSession && currentView !== 'auth' && <Footer setView={setView} />}
+      {!userSession && currentView === 'home' && <Footer setView={setView} />}
 
       {/* Notifications */}
       {toast && (

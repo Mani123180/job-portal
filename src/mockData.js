@@ -1,10 +1,10 @@
 // Simulated LocalStorage Database Manager for Job Portal App
 
 const KEYS = {
-  JOBS: 'tb_jobs',
-  CANDIDATES: 'tb_candidates',
-  EMPLOYERS: 'tb_employers',
-  APPLICATIONS: 'tb_applications',
+  JOBS: 'tb_jobs_in',
+  CANDIDATES: 'tb_candidates_in',
+  EMPLOYERS: 'tb_employers_in',
+  APPLICATIONS: 'tb_applications_in',
   SESSION: 'tb_session'
 };
 
@@ -12,13 +12,13 @@ const DEFAULT_JOBS = [
   {
     id: 'job-1',
     title: 'Senior React Developer',
-    companyName: 'TechCorp',
+    companyName: 'Zoho Corporation',
     employerId: 'emp-1',
-    location: 'Remote (US)',
+    location: 'Chennai, Tamil Nadu',
     employmentType: 'Full-time',
     experienceRequired: '5+ Years',
-    salary: '$120,000 - $140,000',
-    description: 'We are looking for a Senior React Developer who is passionate about creating clean, scalable user interfaces. You will collaborate with product designers and engineers to build a premium cloud experience. Responsibilities include mentoring junior developers and optimizing app load times.',
+    salary: '₹12,00,000 - ₹16,00,000 / year',
+    description: 'We are seeking a Senior React Developer to join Zoho Corporation. You will design, build, and optimize SaaS dashboard modules. You will collaborate with design teams in Estancia IT Park, Chennai, and help mentor junior web engineers.',
     skillsRequired: ['React', 'JavaScript', 'Tailwind CSS', 'TypeScript', 'Redux Toolkit'],
     lastDate: '2026-09-15',
     status: 'open'
@@ -26,13 +26,13 @@ const DEFAULT_JOBS = [
   {
     id: 'job-2',
     title: 'Junior UI/UX Designer',
-    companyName: 'CreativeStream',
-    employerId: 'emp-2',
-    location: 'New York, NY',
+    companyName: 'Freshworks',
+    employerId: 'emp-3',
+    location: 'Chennai, Tamil Nadu',
     employmentType: 'Full-time',
     experienceRequired: '1-3 Years',
-    salary: '$70,000 - $85,000',
-    description: 'CreativeStream is seeking an enthusiastic Junior UI/UX Designer to design modern digital products. You will work on layout design, typography, wireframing, and interactive prototypes. Knowledge of Figma is required.',
+    salary: '₹6,00,000 - ₹8,00,000 / year',
+    description: 'Freshworks is seek a creative Junior UI/UX Designer in Chennai. You will build user journey diagrams, wireframe responsive screens, and design mock components in Figma.',
     skillsRequired: ['Figma', 'UI Design', 'Wireframing', 'Prototyping', 'Adobe Illustrator'],
     lastDate: '2026-08-30',
     status: 'open'
@@ -40,13 +40,13 @@ const DEFAULT_JOBS = [
   {
     id: 'job-3',
     title: 'Frontend Engineering Intern',
-    companyName: 'TechCorp',
+    companyName: 'Zoho Corporation',
     employerId: 'emp-1',
-    location: 'San Francisco, CA',
+    location: 'Guindy, Chennai',
     employmentType: 'Internship',
     experienceRequired: 'No Experience',
-    salary: '$35 - $45 / hour',
-    description: 'Join the TechCorp team as a Frontend Engineering Intern. You will get hands-on experience working on production features using React and Tailwind CSS. Mentorship will be provided by senior engineers.',
+    salary: '₹25,000 - ₹35,000 / month',
+    description: 'Kickstart your web developer journey with Zoho. You will receive direct guidance from tech leads, write React features, and work in our Chennai collaborative workspaces.',
     skillsRequired: ['HTML', 'CSS', 'JavaScript', 'React', 'Git'],
     lastDate: '2026-08-10',
     status: 'open'
@@ -54,13 +54,13 @@ const DEFAULT_JOBS = [
   {
     id: 'job-4',
     title: 'Product Marketing Manager',
-    companyName: 'GrowthScale',
-    employerId: 'emp-3',
-    location: 'Chicago, IL',
+    companyName: 'Razorpay',
+    employerId: 'emp-4',
+    location: 'Whitefield, Bengaluru',
     employmentType: 'Full-time',
     experienceRequired: '3+ Years',
-    salary: '$95,000 - $110,000',
-    description: 'We are seeking a Product Marketing Manager to scale our digital campaigns. You will coordinate product launches, direct content strategy, optimize SEO, and lead user acquisition strategies.',
+    salary: '₹10,00,000 - ₹14,00,000 / year',
+    description: 'Razorpay is scaling its digital payment gateways. We seek a Product Marketing lead to build acquisition funnels, run SEO campaigns, and coordinate with our Bengaluru team.',
     skillsRequired: ['SEO', 'Content Strategy', 'Copywriting', 'Product Marketing', 'Google Analytics'],
     lastDate: '2026-10-01',
     status: 'open'
@@ -68,15 +68,15 @@ const DEFAULT_JOBS = [
   {
     id: 'job-5',
     title: 'Full Stack Engineer (Node/React)',
-    companyName: 'Innovate Solutions',
+    companyName: 'Infosys Limited',
     employerId: 'emp-2',
-    location: 'Remote (Global)',
+    location: 'Electronic City, Bengaluru',
     employmentType: 'Full-time',
     experienceRequired: '3+ Years',
-    salary: '$100,000 - $125,000',
-    description: 'Looking for a developer comfortable with both React and Node.js. You will design, build, and support database schemas and frontend layouts. Excellent system architecture understanding is a plus.',
+    salary: '₹8,50,000 - ₹11,00,000 / year',
+    description: 'Looking for a developer comfortable with both React and Node.js. You will design, build, and support database schemas and frontend layouts at our Infosys Electronic City campus.',
     skillsRequired: ['Node.js', 'Express.js', 'React', 'MongoDB', 'PostgreSQL', 'REST APIs'],
-    lastDate: '2026-06-30', // Passed date to simulate closed/expiring check
+    lastDate: '2026-06-30',
     status: 'open'
   }
 ];
@@ -84,28 +84,28 @@ const DEFAULT_JOBS = [
 const DEFAULT_CANDIDATES = [
   {
     id: 'cand-1',
-    name: 'Jane Doe',
+    name: 'Karthik Raja',
     email: 'candidate@demo.com',
     password: 'password',
-    phone: '+1 (555) 123-4567',
-    location: 'Seattle, WA',
-    qualification: 'Bachelor\'s in Computer Science',
+    phone: '+91 98401 23456',
+    location: 'Adyar, Chennai',
+    qualification: 'B.E. in Computer Science - Anna University',
     experience: '3 years as Frontend Developer at WebLabs, building interactive React interfaces.',
     skills: ['React', 'JavaScript', 'Tailwind CSS', 'TypeScript', 'Git'],
-    resumeName: 'Jane_Doe_Resume.pdf',
+    resumeName: 'Karthik_Raja_Resume.pdf',
     resumeSize: '154 KB'
   },
   {
     id: 'cand-2',
-    name: 'Alex Rivera',
+    name: 'Priyanka Sen',
     email: 'alex@demo.com',
     password: 'password',
-    phone: '+1 (555) 987-6543',
-    location: 'Los Angeles, CA',
-    qualification: 'Diploma in UI/UX Design',
+    phone: '+91 80560 98765',
+    location: 'Hebbal, Bengaluru',
+    qualification: 'B.Tech in Information Technology - PES University',
     experience: '2 years of freelance design work for SaaS products.',
     skills: ['Figma', 'UI Design', 'Wireframing', 'Prototyping'],
-    resumeName: 'Alex_Rivera_Portfolio.pdf',
+    resumeName: 'Priyanka_Sen_Portfolio.pdf',
     resumeSize: '320 KB'
   }
 ];
@@ -113,25 +113,25 @@ const DEFAULT_CANDIDATES = [
 const DEFAULT_EMPLOYERS = [
   {
     id: 'emp-1',
-    companyName: 'TechCorp',
+    companyName: 'Zoho Corporation',
     email: 'employer@demo.com',
     password: 'password',
     logo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=120&h=120&q=80',
-    industry: 'Information Technology',
-    description: 'TechCorp is an international software company building next-generation productivity suites and enterprise infrastructure tools.',
-    website: 'https://techcorp.example.com',
-    location: 'San Francisco, CA'
+    industry: 'Cloud Software & SaaS',
+    description: 'Zoho Corporation is a leading technology company building comprehensive operating suites for businesses, operated from Chennai and rural Tenkasi.',
+    website: 'https://zoho.com',
+    location: 'Chennai, Tamil Nadu'
   },
   {
     id: 'emp-2',
-    companyName: 'Innovate Solutions',
+    companyName: 'Infosys Limited',
     email: 'innovate@demo.com',
     password: 'password',
     logo: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=120&h=120&q=80',
-    industry: 'Software Consulting',
-    description: 'Innovate Solutions designs, consults, and integrates custom digital web products for growing startups.',
-    website: 'https://innovate.example.com',
-    location: 'New York, NY'
+    industry: 'IT Services & Consulting',
+    description: 'Infosys is a global leader in next-generation digital services and consulting, headquartered in Bengaluru.',
+    website: 'https://infosys.com',
+    location: 'Bengaluru, Karnataka'
   }
 ];
 
@@ -140,13 +140,13 @@ const DEFAULT_APPLICATIONS = [
     id: 'app-1',
     jobId: 'job-1',
     jobTitle: 'Senior React Developer',
-    companyName: 'TechCorp',
+    companyName: 'Zoho Corporation',
     candidateId: 'cand-1',
-    candidateName: 'Jane Doe',
+    candidateName: 'Karthik Raja',
     candidateEmail: 'candidate@demo.com',
-    candidatePhone: '+1 (555) 123-4567',
+    candidatePhone: '+91 98401 23456',
     candidateSkills: ['React', 'JavaScript', 'Tailwind CSS', 'TypeScript', 'Git'],
-    resumeName: 'Jane_Doe_Resume.pdf',
+    resumeName: 'Karthik_Raja_Resume.pdf',
     status: 'Under Review',
     appliedDate: '2026-07-15'
   },
@@ -154,13 +154,13 @@ const DEFAULT_APPLICATIONS = [
     id: 'app-2',
     jobId: 'job-2',
     jobTitle: 'Junior UI/UX Designer',
-    companyName: 'CreativeStream',
+    companyName: 'Freshworks',
     candidateId: 'cand-2',
-    candidateName: 'Alex Rivera',
+    candidateName: 'Priyanka Sen',
     candidateEmail: 'alex@demo.com',
-    candidatePhone: '+1 (555) 987-6543',
+    candidatePhone: '+91 80560 98765',
     candidateSkills: ['Figma', 'UI Design', 'Wireframing', 'Prototyping'],
-    resumeName: 'Alex_Rivera_Portfolio.pdf',
+    resumeName: 'Priyanka_Sen_Portfolio.pdf',
     status: 'Interviewing',
     appliedDate: '2026-07-16'
   }

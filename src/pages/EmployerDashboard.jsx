@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { LayoutDashboard, Building, PlusCircle, Briefcase, Users, Edit, ToggleLeft, Trash2, Calendar, FileText, CheckCircle, MapPin, ExternalLink, X, Download } from 'lucide-react';
+import { LayoutDashboard, Building, PlusCircle, Briefcase, Users, Edit, ToggleLeft, Trash2, Calendar, FileText, CheckCircle, MapPin, ExternalLink, X, Download, Menu } from 'lucide-react';
 import { getEmployers, saveEmployerProfile, getJobs, saveJob, deleteJob, getApplications, updateApplicationStatus } from '../mockData';
 import Modal from '../components/Modal';
 
 export default function EmployerDashboard({ userSession, addToast }) {
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'profile' | 'post-job' | 'my-jobs' | 'applicants'
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [companyProfile, setCompanyProfile] = useState(null);
   const [myJobs, setMyJobs] = useState([]);
   const [applicants, setApplicants] = useState([]);
@@ -180,16 +181,26 @@ export default function EmployerDashboard({ userSession, addToast }) {
       {/* Sidebar Navigation */}
       <div className="w-full md:w-64 shrink-0 space-y-4">
         {/* Company Header */}
-        <div className="p-6 rounded-2xl border border-slate-900 bg-slate-900/30 glass flex items-center gap-3">
-          <img src={companyProfile.logo} alt="Company Logo" className="w-10 h-10 rounded-xl object-cover border border-slate-800" />
-          <div className="max-w-[130px]">
-            <h4 className="text-sm font-bold text-slate-200 truncate">{companyProfile.companyName}</h4>
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Employer Account</span>
+        <div className="p-6 rounded-2xl border border-slate-900 bg-slate-900/30 glass flex items-center justify-between md:justify-start gap-3">
+          <div className="flex items-center gap-3">
+            <img src={companyProfile.logo} alt="Company Logo" className="w-10 h-10 rounded-xl object-cover border border-slate-800" />
+            <div className="max-w-[120px]">
+              <h4 className="text-sm font-bold text-slate-200 truncate">{companyProfile.companyName}</h4>
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Employer Account</span>
+            </div>
           </div>
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 cursor-pointer"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          </button>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="p-2 rounded-2xl border border-slate-900 bg-slate-900/10 glass flex flex-col gap-1">
+        <div className={`p-2 rounded-2xl border border-slate-900 bg-slate-900/10 glass flex flex-col gap-1 md:flex ${mobileMenuOpen ? 'flex' : 'hidden'}`}>
           {[
             { id: 'overview', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
             { id: 'profile', label: 'Company Profile', icon: <Building className="w-4 h-4" /> },
@@ -202,6 +213,7 @@ export default function EmployerDashboard({ userSession, addToast }) {
               onClick={() => {
                 setActiveTab(tab.id);
                 if (tab.id !== 'post-job') setEditingJobId(null);
+                setMobileMenuOpen(false);
               }}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-left cursor-pointer ${
                 activeTab === tab.id

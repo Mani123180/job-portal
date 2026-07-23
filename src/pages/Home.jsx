@@ -80,7 +80,7 @@ export default function Home({ setView, setJobFilters, setSelectedJob }) {
                 type="text"
                 value={searchLocation}
                 onChange={(e) => setSearchLocation(e.target.value)}
-                placeholder="Location (e.g. Remote, NY)..."
+                placeholder="Location (e.g. Chennai, Bengaluru)..."
                 className="w-full bg-transparent text-sm text-slate-200 outline-none placeholder:text-slate-500"
               />
             </div>

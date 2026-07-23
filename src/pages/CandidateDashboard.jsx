@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { LayoutDashboard, User, FileText, CheckSquare, Plus, Trash2, Download, Briefcase, MapPin, ExternalLink, Calendar } from 'lucide-react';
+import { LayoutDashboard, User, FileText, CheckSquare, Plus, Trash2, Download, Briefcase, MapPin, ExternalLink, Calendar, Menu, X } from 'lucide-react';
 import { getCandidates, saveCandidateProfile, getApplications, getJobs, applyToJob } from '../mockData';
 
 export default function CandidateDashboard({ userSession, addToast, setView, setSelectedJob }) {
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'profile' | 'resume' | 'applications'
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profile, setProfile] = useState(null);
   const [applications, setApplications] = useState([]);
   const [availableJobs, setAvailableJobs] = useState([]);
@@ -191,18 +192,28 @@ export default function CandidateDashboard({ userSession, addToast, setView, set
       {/* Sidebar Navigation */}
       <div className="w-full md:w-64 shrink-0 space-y-4">
         {/* Profile Card Header */}
-        <div className="p-6 rounded-2xl border border-slate-900 bg-slate-900/30 glass flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center text-violet-400 font-bold uppercase text-lg">
-            {profile.name ? profile.name.charAt(0) : 'U'}
+        <div className="p-6 rounded-2xl border border-slate-900 bg-slate-900/30 glass flex items-center justify-between md:justify-start gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center text-violet-400 font-bold uppercase text-lg">
+              {profile.name ? profile.name.charAt(0) : 'U'}
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-slate-200 truncate max-w-[120px]">{profile.name}</h4>
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Candidate Account</span>
+            </div>
           </div>
-          <div>
-            <h4 className="text-sm font-bold text-slate-200 truncate max-w-[150px]">{profile.name}</h4>
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Candidate Account</span>
-          </div>
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 cursor-pointer"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          </button>
         </div>
 
         {/* Tab buttons */}
-        <div className="p-2 rounded-2xl border border-slate-900 bg-slate-900/10 glass flex flex-col gap-1">
+        <div className={`p-2 rounded-2xl border border-slate-900 bg-slate-900/10 glass flex flex-col gap-1 md:flex ${mobileMenuOpen ? 'flex' : 'hidden'}`}>
           {[
             { id: 'overview', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
             { id: 'profile', label: 'My Profile', icon: <User className="w-4 h-4" /> },
@@ -211,7 +222,10 @@ export default function CandidateDashboard({ userSession, addToast, setView, set
           ].map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                setMobileMenuOpen(false);
+              }}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-left cursor-pointer ${
                 activeTab === tab.id
                   ? 'bg-slate-900 text-violet-400 border border-slate-800 shadow-sm'

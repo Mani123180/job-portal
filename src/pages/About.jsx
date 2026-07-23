@@ -85,9 +85,9 @@ export default function About() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {[
-            { name: 'Sarah Connor', role: 'Chief Executive Officer', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80' },
-            { name: 'Marcus Wright', role: 'Chief Technology Officer', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80' },
-            { name: 'Elena Fisher', role: 'VP of Product Experience', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80' }
+            { name: 'Sridhar Vembu', role: 'Chief Executive Officer', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80' },
+            { name: 'N. R. Narayana Murthy', role: 'Chief Technology Officer', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80' },
+            { name: 'Girish Mathrubootham', role: 'VP of Product Experience', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80' }
           ].map((member, idx) => (
             <div key={idx} className="p-6 rounded-2xl border border-slate-900 bg-slate-950/40 glass flex flex-col items-center text-center gap-4">
               <img src={member.img} alt={member.name} className="w-20 h-20 rounded-full border border-violet-500/20 object-cover" />
